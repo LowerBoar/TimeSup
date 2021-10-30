@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		movementVector = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+		var mousePosition = FindObjectOfType<Camera>().ScreenToWorldPoint(Input.mousePosition);
+		transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg * Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) - 90f);
 	}
 
 	void FixedUpdate()
