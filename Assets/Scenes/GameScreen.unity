@@ -130,9 +130,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2243072896753560080, guid: 2a10bd43c65aade48b52f06a3cee0f5d, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2335916586344178306, guid: 2a10bd43c65aade48b52f06a3cee0f5d, type: 3}
       propertyPath: m_Name
       value: GameplayEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381459482605822639, guid: 2a10bd43c65aade48b52f06a3cee0f5d, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086585856034661168, guid: 2a10bd43c65aade48b52f06a3cee0f5d, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6948699509379983274, guid: 2a10bd43c65aade48b52f06a3cee0f5d, type: 3}
       propertyPath: m_RootOrder
@@ -176,6 +188,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948699509379983274, guid: 2a10bd43c65aade48b52f06a3cee0f5d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349711992160173664, guid: 2a10bd43c65aade48b52f06a3cee0f5d, type: 3}
+      propertyPath: m_EdgeRadius
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
