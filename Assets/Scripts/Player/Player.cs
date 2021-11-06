@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+	private const float Cooldown = 0.5f;
+
 	public Bullet Bullet;
 
 	private float moveSpeed = 10f;
@@ -13,6 +15,7 @@ public class Player : MonoBehaviour
 	private readonly KeyCode[] controlKeys = { KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.S, KeyCode.Mouse0 };	// TODO Use enum
 	private HashSet<KeyCode> pressedKeys;
 	private bool manualControl = true;
+	private float timeSinceLastShot = Cooldown;
 
 	void Start()
 	{
@@ -44,11 +47,16 @@ public class Player : MonoBehaviour
 					movementVector.y = 1;
 					break;
 				case KeyCode.Mouse0:
-					var bullet = Instantiate(Bullet);
-					bullet.Initialize(transform.position, transform.up);
+					if (timeSinceLastShot >= Cooldown) {
+						var bullet = Instantiate(Bullet);
+						bullet.Initialize(transform.position, transform.up);
+						timeSinceLastShot = 0f;
+					}
 					break;
 			}
 		}
+
+		timeSinceLastShot += Time.deltaTime;
 	}
 
 	private void GetManualInputs()
