@@ -17,15 +17,25 @@ public class Player : MonoBehaviour
 	private bool manualControl = true;
 	private float timeSinceLastShot = Cooldown;
 
+	private InputRecorder inputRecorder;
+
 	void Start()
 	{
 		pressedKeys = new HashSet<KeyCode>();
+		inputRecorder = new InputRecorder();
 	}
 
 	void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.P)) {
+			manualControl = !manualControl;
+			inputRecorder.Reset();
+		}
+
 		if (manualControl) {
 			GetManualInputs();
+		} else {
+			GetRecordedInputs();
 		}
 
 		var mousePosition = FindObjectOfType<Camera>().ScreenToWorldPoint(Input.mousePosition); // TODO Handle later somehow
@@ -57,6 +67,7 @@ public class Player : MonoBehaviour
 		}
 
 		timeSinceLastShot += Time.deltaTime;
+		inputRecorder.Update(Time.deltaTime);
 	}
 
 	private void GetManualInputs()
@@ -64,17 +75,25 @@ public class Player : MonoBehaviour
 		foreach (var key in controlKeys) {
 			if (Input.GetKeyDown(key)) {
 				pressedKeys.Add(key);
+				inputRecorder.Record(new InputEvent(key, true));
 			}
 
 			if (Input.GetKeyUp(key)) {
 				pressedKeys.Remove(key);
+				inputRecorder.Record(new InputEvent(key, false));
 			}
 		}
 	}
 
 	private void GetRecordedInputs()
 	{
-		// TODO Use InputRecorder
+		foreach (var @event in inputRecorder.GetEvents()) {
+			if (@event.IsPressed) {
+				pressedKeys.Add(@event.Key);
+			} else {
+				pressedKeys.Remove(@event.Key);
+			}
+		}
 	}
 
 	void FixedUpdate()

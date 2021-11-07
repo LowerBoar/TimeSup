@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputRecorder
 {
-	private List<(InputEvent Event, float Time)> records;
+	private readonly List<(InputEvent Event, float Time)> records;
 	private float currentTime;
 	private int currentEvent;
 
@@ -18,9 +18,15 @@ public class InputRecorder
 		currentTime += deltaTime;
 	}
 
-	public void Record(InputEvent @event, float time)
+	public void Reset()
 	{
-		records.Add((@event, time));
+		currentTime = 0;
+		currentEvent = 0;
+	}
+
+	public void Record(InputEvent @event)
+	{
+		records.Add((@event, currentTime));
 	}
 
 	public InputEvent[] GetEvents()
