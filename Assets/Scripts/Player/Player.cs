@@ -34,12 +34,12 @@ public class Player : MonoBehaviour
 
 		if (manualControl) {
 			GetManualInputs();
+
+			var mousePosition = FindObjectOfType<Camera>().ScreenToWorldPoint(Input.mousePosition); // TODO Handle later somehow
+			transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg * Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) - 90f);
 		} else {
 			GetRecordedInputs();
 		}
-
-		var mousePosition = FindObjectOfType<Camera>().ScreenToWorldPoint(Input.mousePosition); // TODO Handle later somehow
-		transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg * Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) - 90f);
 
 		movementVector = Vector3.zero;
 		foreach (var key in pressedKeys) {
@@ -75,12 +75,12 @@ public class Player : MonoBehaviour
 		foreach (var key in controlKeys) {
 			if (Input.GetKeyDown(key)) {
 				pressedKeys.Add(key);
-				inputRecorder.Record(new InputEvent(key, true));
+				inputRecorder.Record(new InputEvent(key, true, transform.rotation));
 			}
 
 			if (Input.GetKeyUp(key)) {
 				pressedKeys.Remove(key);
-				inputRecorder.Record(new InputEvent(key, false));
+				inputRecorder.Record(new InputEvent(key, false, transform.rotation));
 			}
 		}
 	}
@@ -93,6 +93,8 @@ public class Player : MonoBehaviour
 			} else {
 				pressedKeys.Remove(@event.Key);
 			}
+
+			transform.rotation = @event.Rotation;	// TODO Maybe should not be on this level
 		}
 	}
 

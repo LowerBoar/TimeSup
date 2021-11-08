@@ -50,10 +50,12 @@ public struct InputEvent
 {
 	public KeyCode Key;
 	public bool IsPressed;
+	public Quaternion Rotation;
 
-	public InputEvent(KeyCode key, bool isPressed)
+	public InputEvent(KeyCode key, bool isPressed, Quaternion rotation)
 	{
 		Key = key;
 		IsPressed = isPressed;
+		Rotation = rotation;
 	}
 }
