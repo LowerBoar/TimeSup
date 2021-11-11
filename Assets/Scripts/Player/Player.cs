@@ -35,9 +35,11 @@ public class Player : MonoBehaviour
 		if (manualControl) {
 			GetManualInputs();
 
-			var mousePosition = FindObjectOfType<Camera>().ScreenToWorldPoint(Input.mousePosition); // TODO Handle later somehow
-			transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg * Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) - 90f);
-		} else {
+            transform.rotation = Math.LookAt2D(
+                transform.position,
+                FindObjectOfType<Camera>().ScreenToWorldPoint(Input.mousePosition)
+            );
+        } else {
 			GetRecordedInputs();
 		}
 
