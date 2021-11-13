@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private GameObject target;
+    private Player target;
 
     void Start()
     {
@@ -13,10 +13,14 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        
+        if (target == null) {
+            return;
+        }
+
+        transform.rotation = Math.LookAt2D(transform.position, target.transform.position);
     }
 
-    public void SetTarget(GameObject newTarget)
+    public void SetTarget(Player newTarget)
     {
         target = newTarget;
     }

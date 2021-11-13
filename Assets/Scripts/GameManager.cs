@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject PlayerPrefab;
-    public GameObject EnemyPrefab;
+    public Player PlayerPrefab;
+    public Enemy EnemyPrefab;
 
-    private List<GameObject> players;
+    private List<Player> players;
 
     void Start()
     {
-        players = new List<GameObject>();
+        players = new List<Player>();
 
         SpawnPlayer();
         SpawnEnemy();
@@ -36,5 +37,6 @@ public class GameManager : MonoBehaviour
 
         var enemy = Instantiate(EnemyPrefab, transform.position + new Vector3(x, y, 0), Quaternion.identity);
         enemy.transform.SetParent(transform);
+        enemy.SetTarget(players.Last());
     }
 }
