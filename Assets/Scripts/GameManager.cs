@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        var x = Random.Range(-12f, 12f);
-        var y = Random.Range(-12f, 12f);
+        var x = Random.Range(-10f, 10f);
+        var y = Random.Range(-10f, 10f);
 
         var enemy = Instantiate(EnemyPrefab, transform.position + new Vector3(x, y, 0), Quaternion.identity);
         enemy.transform.SetParent(transform);
