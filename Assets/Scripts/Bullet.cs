@@ -15,4 +15,11 @@ public class Bullet : MonoBehaviour
 	    transform.position = position;
 	    movementVector = direction;
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Enemy")) {
+            Destroy(gameObject);
+        }
+    }
 }

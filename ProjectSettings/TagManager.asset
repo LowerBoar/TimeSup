@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - GarbageCollector
+  - Enemy
   layers:
   - Default
   - TransparentFX
