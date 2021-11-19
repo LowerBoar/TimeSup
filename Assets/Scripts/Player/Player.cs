@@ -59,9 +59,10 @@ public class Player : MonoBehaviour
 					movementVector.y = 1;
 					break;
 				case KeyCode.Mouse0:
-					if (timeSinceLastShot >= Cooldown) {
+					if (timeSinceLastShot >= Cooldown) {	// TODO Move to weapon class?
 						var bullet = Instantiate(Bullet);
-						bullet.Initialize(transform.position, transform.up);
+						bullet.Initialize(transform.position, transform.up, true);
+                        bullet.transform.rotation = transform.rotation;
 						timeSinceLastShot = 0f;
 					}
 					break;

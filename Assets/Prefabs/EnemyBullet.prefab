@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!60 &6717531723252464316
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051249491960707803}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 0.5, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.033294503, y: 0.25104234}
+      - {x: -0.2489577, y: -0.21257631}
+      - {x: -0.25, y: -0.25}
+      - {x: 0.25, y: -0.25}
+      - {x: 0.24374598, y: -0.21361864}
+      - {x: 0.037463848, y: 0.25104234}
 --- !u!1001 &2618645173883996868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59,5 +90,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBullet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4667813136373297206, guid: 5f4c5ae41b53ee1419a7a4c5b7272d8d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5f4c5ae41b53ee1419a7a4c5b7272d8d, type: 3}
+--- !u!1 &9051249491960707803 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6470323135406485535, guid: 5f4c5ae41b53ee1419a7a4c5b7272d8d, type: 3}
+  m_PrefabInstance: {fileID: 2618645173883996868}
+  m_PrefabAsset: {fileID: 0}
