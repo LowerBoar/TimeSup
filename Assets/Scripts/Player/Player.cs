@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
 	private const float Cooldown = 0.5f;
 
 	public Bullet Bullet;
+    public float Health { get; set; } = 10f;
 
-	private float moveSpeed = 10f;
+    private float moveSpeed = 10f;
 	private Vector3 movementVector;
 
 	private readonly KeyCode[] controlKeys = { KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.S, KeyCode.Mouse0 };	// TODO Use enum
@@ -73,6 +74,11 @@ public class Player : MonoBehaviour
 		inputRecorder.Update(Time.deltaTime);
 	}
 
+    void FixedUpdate()
+    {
+        gameObject.transform.position += movementVector * moveSpeed * Time.fixedDeltaTime;
+    }
+
 	private void GetManualInputs()
 	{
 		foreach (var key in controlKeys) {
@@ -101,8 +107,8 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	void FixedUpdate()
-	{
-		gameObject.transform.position += movementVector * moveSpeed * Time.fixedDeltaTime;
-	}
+    public void GetDamaged(float damage)
+    {
+        Health -= damage;
+    }
 }

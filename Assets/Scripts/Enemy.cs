@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     private const float Cooldown = 1f;
     public Bullet Bullet;
+    public float Health { get; set; } = 5f;
 
     private Player target;
     private float timeSinceLastShot;
@@ -36,5 +37,13 @@ public class Enemy : MonoBehaviour
     public void SetTarget(Player newTarget)
     {
         target = newTarget;
+    }
+
+    public void GetDamaged(float damage)
+    {
+        Health -= damage;
+        if (Health <= 0) {
+            Destroy(gameObject);
+        }
     }
 }

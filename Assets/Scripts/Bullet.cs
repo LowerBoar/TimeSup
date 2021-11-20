@@ -20,7 +20,12 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag(shotByPlayer ? "Enemy" : "Player")) {
+        if (collision.transform.CompareTag(shotByPlayer ? "Enemy" : "Player")) {    // TODO There must be better way
+            if (shotByPlayer) {
+                collision.gameObject.GetComponent<Enemy>().GetDamaged(1f);
+            } else {
+                collision.gameObject.GetComponent<Player>().GetDamaged(1f);
+            }
             Destroy(gameObject);
         }
     }
