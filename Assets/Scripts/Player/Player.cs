@@ -23,17 +23,11 @@ public class Player : MonoBehaviour, IDamageable
 	void Start()
 	{
 		pressedKeys = new HashSet<KeyCode>();
-		inputRecorder = new InputRecorder();
 	}
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.P)) {
-			manualControl = !manualControl;
-			inputRecorder.Reset();
-		}
-
-		if (manualControl) {
+        if (manualControl) {
 			GetManualInputs();
 
             transform.rotation = Math.LookAt2D(
@@ -77,6 +71,23 @@ public class Player : MonoBehaviour, IDamageable
     void FixedUpdate()
     {
         gameObject.transform.position += movementVector * moveSpeed * Time.fixedDeltaTime;
+    }
+
+    public InputRecorder GetInputRecorder()
+    {
+        return inputRecorder;
+    }
+
+    public void SetupInputRecorder(InputRecorder recorder = null)
+    {
+        if (recorder != null) {
+            inputRecorder = recorder;
+            inputRecorder.Reset();
+            manualControl = false;
+        } else {
+            inputRecorder = new InputRecorder();
+            manualControl = true;
+        }
     }
 
 	private void GetManualInputs()
