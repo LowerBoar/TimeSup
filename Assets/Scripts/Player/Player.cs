@@ -59,6 +59,8 @@ public class Player : MonoBehaviour, IDamageable
 						bullet.Initialize(transform.position, transform.up, true);
                         bullet.transform.rotation = transform.rotation;
 						timeSinceLastShot = 0f;
+
+						FindObjectOfType<SoundManager>().PlaySound("PlayerShot", true);
 					}
 					break;
 			}
