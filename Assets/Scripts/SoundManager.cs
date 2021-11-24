@@ -41,6 +41,8 @@ public class SoundManager : MonoBehaviour
 			    source.pitch = Random.Range(0.8f, 1.2f);
 		    }
 
+            source.volume = sound.Volume;
+
 			source.Play();
 			soundSources.Add(source);
 	    }
@@ -57,8 +59,9 @@ public class SoundManager : MonoBehaviour
 }
 
 [Serializable]
-public struct Sound
+public class Sound
 {
 	public string Name;
 	public AudioClip Clip;
+    public float Volume = 1f;
 }

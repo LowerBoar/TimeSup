@@ -195,6 +195,7 @@ MonoBehaviour:
   Sounds:
   - Name: PlayerShot
     Clip: {fileID: 8300000, guid: 34b439bf70b80a6409eadecc6be92d68, type: 3}
+    Volume: 0.15
   Music: []
 --- !u!1 &1340291844
 GameObject:
