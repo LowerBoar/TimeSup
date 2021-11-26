@@ -29,6 +29,8 @@ public class Enemy : MonoBehaviour, IDamageable
             bullet.Initialize(transform.position, transform.up, false);
             bullet.transform.rotation = transform.rotation;
             timeSinceLastShot = 0f;
+
+            FindObjectOfType<SoundManager>().PlaySound("EnemyShot", true);
         }
 
         timeSinceLastShot += Time.deltaTime;
