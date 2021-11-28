@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour
 
     private List<Player> players;
     private List<InputRecorder> recorders;
+    private List<Enemy> enemies;
 
     void Start()
     {
         players = new List<Player>();
         recorders = new List<InputRecorder>();
+        enemies = new List<Enemy>();
 
         SpawnPlayer();
         SpawnEnemy();
@@ -23,23 +25,33 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P)) {
-            recorders.Clear();
-            var amount = players.Count;
-            foreach (var player in players.ToArray()) {
-                recorders.Add(player.GetInputRecorder());
-                Destroy(player.gameObject);
-            }
-            players.Clear();
-
-            // TODO Destroy enemies
-            for (var i = 0; i < amount; ++i) {  // TODO Make dedicated function for players spawning
-                SpawnPlayer(i);
-                players.Last().SetupInputRecorder(recorders[i]);
-            }
-            SpawnPlayer();
-
-            SpawnEnemy();
+            ReStart();
         }
+    }
+
+    private void ReStart()
+    {
+        recorders.Clear();
+        var amount = players.Count;
+        foreach (var player in players.ToArray()) {
+            recorders.Add(player.GetInputRecorder());
+            Destroy(player.gameObject);
+        }
+        players.Clear();
+
+        // TODO Destroy enemies
+        for (var i = 0; i < amount; ++i) {  // TODO Make dedicated function for players spawning
+            SpawnPlayer(i);
+            players.Last().SetupInputRecorder(recorders[i]);
+        }
+        SpawnPlayer();
+
+        foreach (var enemy in enemies.ToArray()) {
+            Destroy(enemy.gameObject);
+        }
+        enemies.Clear();
+
+        SpawnEnemy();
     }
 
     // TODO Split to different functions for manual and non-manual controlled players or think of some other way
@@ -68,5 +80,7 @@ public class GameManager : MonoBehaviour
         var enemy = Instantiate(EnemyPrefab, transform.position + new Vector3(x, y, 0), Quaternion.identity);
         enemy.transform.SetParent(transform);
         enemy.SetTarget(players.Last());
+
+        enemies.Add(enemy);
     }
 }
