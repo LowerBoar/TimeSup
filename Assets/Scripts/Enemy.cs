@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         Health -= damage;
         if (Health <= 0) {
-            Destroy(gameObject);
+            Destroy(gameObject);    // TODO Do not die, just become disabled
         }
     }
 }

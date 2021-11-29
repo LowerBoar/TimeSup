@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     private List<InputRecorder> recorders;
     private List<Enemy> enemies;
 
+    private float enemySpawnRate = 3f;
+    private float timeSinceEnemySpawn;
+
     void Start()
     {
         players = new List<Player>();
@@ -27,6 +30,12 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P)) {
             ReStart();
         }
+
+        if (timeSinceEnemySpawn >= enemySpawnRate) {
+            SpawnEnemy();
+        }
+
+        timeSinceEnemySpawn += Time.deltaTime;
     }
 
     private void ReStart()
@@ -82,5 +91,7 @@ public class GameManager : MonoBehaviour
         enemy.SetTarget(players.Last());
 
         enemies.Add(enemy);
+
+        timeSinceEnemySpawn = 0f;
     }
 }
