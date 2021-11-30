@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Start()
     {
-        
+        timeSinceLastShot = Random.Range(0f, Cooldown);
     }
 
     void Update()
