@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         timeSinceEnemySpawn += Time.deltaTime;
     }
 
-    private void ReStart()
+    public void ReStart()
     {
         recorders.Clear();
         var amount = players.Count;

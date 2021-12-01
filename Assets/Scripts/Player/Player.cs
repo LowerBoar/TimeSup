@@ -20,6 +20,8 @@ public class Player : MonoBehaviour, IDamageable
 
 	private InputRecorder inputRecorder;
 
+    private bool isDead;
+
 	void Start()
 	{
 		pressedKeys = new HashSet<KeyCode>();
@@ -27,6 +29,10 @@ public class Player : MonoBehaviour, IDamageable
 
 	void Update()
 	{
+        if (isDead) {
+            return;
+        }
+
         if (manualControl) {
 			GetManualInputs();
 
@@ -123,5 +129,15 @@ public class Player : MonoBehaviour, IDamageable
     public void GetDamaged(float damage)
     {
         Health -= damage;
+
+        if (Health <= 0) {
+            if (manualControl) {
+                FindObjectOfType<GameManager>().ReStart();
+            } else {
+                isDead = true;
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<PolygonCollider2D>().enabled = false;
+            }
+		}
     }
 }
