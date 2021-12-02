@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private Player target;
     private float timeSinceLastShot;
+    private bool isDead;
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (target == null) {
+        if (isDead || target == null) {
             return;
         }
 
@@ -45,7 +46,9 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         Health -= damage;
         if (Health <= 0) {
-            Destroy(gameObject);    // TODO Do not die, just become disabled
+            isDead = true;
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<PolygonCollider2D>().enabled = false;
         }
     }
 }
